@@ -67,7 +67,7 @@ function PoliticasDePrivacidade() {
             officia deserunt mollit anim id est laborum.
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="3">
+        <Accordion.Item eventKey="4">
           <Accordion.Header>USO DE COOKIES</Accordion.Header>
           <Accordion.Body>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
