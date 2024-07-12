@@ -1,0 +1,99 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+.form-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+  height: auto;
+  margin: 0px 20px;
+  padding: 30px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(13.5px);
+  -webkit-backdrop-filter: blur(13.5px);
+  background: rgba(255, 255, 255, 0.34);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+#botao-entrar {
+  background-color: #00eece;
+  color: #013543;
+  border: none;
+  transition: 0.5s;
+}
+#botao-entrar:hover {
+  background-color: #013543;
+  border: 1px solid #00eece;
+  color: #00eece;
+}
+
+#botao-cadastrar {
+  background-color: #00eece;
+  color: #013543;
+  border: none;
+  transition: 0.5s;
+}
+
+#botao-cadastrar:hover {
+  background-color: #013543;
+  border: 1px solid #00eece;
+  color: #00eece;
+}
+
+.container-cadastro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 94vh;
+  background: linear-gradient(
+    to right top,
+    #026873,
+    #02646e,
+    #035f69,
+    #035b64,
+    #03575f,
+    #01525c,
+    #004d58,
+    #004854,
+    #004150,
+    #003b4b,
+    #003446,
+    #012e40
+  );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 94vh;
+  background: linear-gradient(
+    to left bottom,
+    #026873,
+    #02646e,
+    #035f69,
+    #035b64,
+    #03575f,
+    #01525c,
+    #004d58,
+    #004854,
+    #004150,
+    #003b4b,
+    #003446,
+    #012e40
+  );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

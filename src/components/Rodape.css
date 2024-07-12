@@ -1,0 +1,8 @@
+.container-rodape {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  bottom: 0;
+}
