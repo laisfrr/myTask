@@ -1,5 +1,8 @@
 import { Button } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
+import { cadastrarUsuario, entrarGooogle } from '../firebase/auth'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 function Cadastro() {
   const {
@@ -7,12 +10,24 @@ function Cadastro() {
     handleSubmit,
     formState: { errors }
   } = useForm()
-  //register --> saber os dados
-  //handle--> evento de clique
 
+  const navigate = useNavigate()
   function cadastrar(data) {
-    console.log('Cadastro')
-    console.log(data)
+    cadastrarUsuario(data.nome, data.email, data.senha)
+      .then(() => {
+        toast.success(`Bem vinda(o) ${data.nome}`)
+        navigate('/tarefas')
+      })
+      .catch(error => {
+        toast.error(`Um erro aconteceu ${error.code}`)
+      })
+  }
+
+  function handleEntrarGoogle() {
+    entrarGooogle().then(() => {
+      toast.success(`Bem vinda(o)`)
+      navigate('/tarefas')
+    })
   }
   return (
     <main className="fluid container-cadastro">
@@ -74,7 +89,12 @@ function Cadastro() {
         >
           CADASTRAR
         </Button>
-        <Button variant="danger" className="mt-2 w-100 fw-bold" type="button">
+        <Button
+          variant="danger"
+          className="mt-2 w-100 fw-bold"
+          type="button"
+          onClick={handleEntrarGoogle}
+        >
           Entrar com o Google
         </Button>
       </form>

@@ -5,7 +5,7 @@ import './Rodape.css'
 function Rodape() {
   return (
     <footer className="container-rodape">
-      <Navbar bg="dark" variant="dark" className="d-flex">
+      <Navbar bg="dark" variant="dark" className="d-flex nav-rodape">
         <Container fluid>
           <Navbar.Collapse className="justify-content-center">
             <Nav>

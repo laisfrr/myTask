@@ -1,5 +1,8 @@
 import { Button } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
+import { entrarGooogle, loginUsuario } from '../firebase/auth'
 
 function Login() {
   const {
@@ -9,7 +12,23 @@ function Login() {
   } = useForm()
 
   function entrar(data) {
-    console.log(data)
+    loginUsuario(data.email, data.senha)
+      .then(() => {
+        toast.success('Bem vinda(o)')
+        navigate('/tarefas')
+      })
+      .catch(error => {
+        toast.error('Email e/ou senha incorreto!')
+      })
+  }
+
+  const navigate = useNavigate()
+
+  function handleEntrarGooogle() {
+    entrarGooogle().then(() => {
+      toast.success('Bem vinda(o)')
+      navigate('/tarefas')
+    })
   }
   return (
     <main className="img-fluid container-login">
@@ -56,7 +75,12 @@ function Login() {
         <Button id="botao-entrar" className="mt-4 w-100 fw-bold" type="submit">
           ENTRAR
         </Button>
-        <Button variant="danger" className="mt-2 w-100 fw-bold" type="button">
+        <Button
+          onClick={handleEntrarGooogle}
+          variant="danger"
+          className="mt-2 w-100 fw-bold"
+          type="button"
+        >
           Entrar com o Google
         </Button>
       </form>

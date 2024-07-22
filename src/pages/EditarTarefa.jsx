@@ -1,12 +1,13 @@
 import { Button } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
-import { addTarefa } from '../firebase/tarefas'
 import toast from 'react-hot-toast'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { getTarefa, updateTarefa } from '../firebase/tarefas'
+import { useContext, useEffect } from 'react'
 import { UsuarioContext } from '../contexts/UsuarioContext'
 
-function NovaTarefa() {
+function EditarTarefa() {
+  const { id } = useParams()
   const {
     register,
     handleSubmit,
@@ -19,25 +20,31 @@ function NovaTarefa() {
   }
   //then-->qdo finalizar eu vou executar  a funcao do arrow
   const navigate = useNavigate()
-
-  function salvarTarefa(data) {
-    //novo campo no documento que associa o usuário e a tarefa que ele criou.
-    data.idUsuario = usuario.uid
-    addTarefa(data)
-      .then(() => {
-        toast.success('Tarefa Adicionada')
-        reset()
+  function CarregarDado() {
+    getTarefa(id).then(tarefa => {
+      if (tarefa) {
+        reset(tarefa)
+      } else {
         navigate('/tarefas')
-      })
-      .catch(() => {
-        toast.error('Tarefa não Adicionada')
-      })
+      }
+    })
   }
-  console.log(errors.titulo)
+
+  function atualizarTarefa(data) {
+    updateTarefa(id, data).then(() => {
+      toast.success('Tarefa Atualizada!')
+      navigate('/tarefas')
+    })
+  }
+
+  useEffect(() => {
+    CarregarDado()
+  }, [])
+
   return (
     <main className="container-form">
-      <form className="form-section" onSubmit={handleSubmit(salvarTarefa)}>
-        <h1>Adicionar Tarefa</h1>
+      <form className="form-section" onSubmit={handleSubmit(atualizarTarefa)}>
+        <h1>Editar Tarefa</h1>
         <hr />
         <div>
           <label htmlFor="titulo">Título:</label>
@@ -98,12 +105,17 @@ function NovaTarefa() {
             <option value="outros">Outros</option>
           </select>
         </div>
-        <Button variant="dark" className="w-100 mt-2" type="submit">
-          Adicionar
+
+        <Button
+          variant="dark"
+          className="w-100 mt-2 container-btn-save"
+          type="submit"
+        >
+          <img src="/save.svg" alt="icone de salvar" className="icon-save" />
+          Salvar
         </Button>
       </form>
     </main>
   )
 }
-
-export default NovaTarefa
+export default EditarTarefa
